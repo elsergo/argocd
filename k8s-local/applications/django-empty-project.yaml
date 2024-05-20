@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: django-empty-project
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: in-cluster
+    namespace: django-empty-project
+  source:
+    path: "HelmCharts/DjangoEmptyProject"
+    repoURL: "git@github.com:elsergo/argocd.git"
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values_prod.yaml
+      parameters:
+        - name: "container.image"
+          value: elsergo/django-empty-project:v1
+
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

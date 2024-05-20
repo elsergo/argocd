@@ -1,0 +1,26 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+  labels:
+    app : {{ .Release.Name }}-deployment
+    owner: SergeySidorenko
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      project: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        project: {{ .Release.Name }}   # Service will look for those PODS Labels!!!
+    spec:
+      containers:
+        - name : {{ .Release.Name }}-backend
+          image: {{ .Values.container.image }}
+          command:
+            - sh
+            - -c
+            - nohup gunicorn --workers=5 --threads 2 --timeout 60 --bind=0.0.0.0:8000 empty.wsgi:application
+          ports:
+            - containerPort: {{ .Values.container.containerPort }}

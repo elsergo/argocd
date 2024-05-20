@@ -1,0 +1,7 @@
+# Dev Override Values for my Helm Chart
+
+container:
+  image: elsergo/django-empty-project:v1
+
+replicaCount: 4
+
