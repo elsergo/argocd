@@ -1,0 +1,36 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-backend-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: {{ .Values.nginx.ingress.host }}
+    http:
+      paths:
+        - path: {{ .Values.backend.ingress.path }}
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-backend
+              port:
+                number: {{ .Values.backend.container.containerPort }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-nginx-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: {{ .Values.nginx.ingress.host }}
+    http:
+      paths:
+        - path: {{ .Values.nginx.ingress.path }}
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-nginx
+              port:
+                number: {{ .Values.nginx.container.containerPort }}

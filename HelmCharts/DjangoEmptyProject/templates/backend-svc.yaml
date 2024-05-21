@@ -1,14 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-service
+  name: {{ .Release.Name }}-backend-service
   labels:
-    owner: DenisAstahov
+    app: {{ .Release.Name }}-backend
+    owner: SergeySidorenko
 spec:
   selector:
+    app: {{ .Release.Name }}-backend
     project: {{ .Release.Name }}    # Selecting PODS with those Labels
   ports:
-    - name: {{ .Release.Name }}-listener
+    - name: {{ .Release.Name }}-backend-listener
       protocol: TCP
       port: {{ .Values.container.containerPort }}  # Port on Load Balancer
       targetPort: {{ .Values.container.containerPort }}  # Port in POD
