@@ -12,6 +12,6 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: {{ .Release.Name }}-backend
+              name: {{ .Release.Name }}-backend-service
               port:
                 number: {{ .Values.backend.container.containerPort }}
