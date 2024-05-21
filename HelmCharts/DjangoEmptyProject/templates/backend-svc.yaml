@@ -4,13 +4,13 @@ metadata:
   name: {{ .Release.Name }}-backend-service
   labels:
     app: {{ .Release.Name }}-backend
+    project: {{ .Release.Name }}
     owner: SergeySidorenko
 spec:
   selector:
     app: {{ .Release.Name }}-backend
-    project: {{ .Release.Name }}    # Selecting PODS with those Labels
   ports:
     - name: {{ .Release.Name }}-backend-listener
       protocol: TCP
-      port: {{ .Values.container.containerPort }}  # Port on Load Balancer
-      targetPort: {{ .Values.container.containerPort }}  # Port in POD
+      port: {{ .Values.backend.container.containerPort }}  # Port on Load Balancer
+      targetPort: {{ .Values.backend.container.containerPort }}  # Port in POD
