@@ -7,7 +7,7 @@ backend:
     containerPort: 8000
   ingress:
     host: "1color.home.sergeysidorenko.com"
-    path: "/admin"
+    path: "/"
 
 nginx:
   replicaCount: 1
@@ -16,4 +16,4 @@ nginx:
     containerPort: 80
   ingress:
     host: "1color.home.sergeysidorenko.com"
-    path: "/"
+    path: "/static"
