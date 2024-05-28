@@ -20,6 +20,8 @@ spec:
       containers:
         - name: backend
           image: {{ .Values.backend.container.image }}
+          imagePullSecrets:
+            - name: nexus-registry-credential
           command:
             - sh
             - -c
