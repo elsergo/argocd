@@ -16,9 +16,6 @@ spec:
     helm:
       valueFiles:
         - values_prod.yaml
-      parameters:
-        - name: "container.image"
-          value: docker-hosted.nexus.home.sergeysidorenko.com/1color/backend:v1
 
   project: default
   syncPolicy:
