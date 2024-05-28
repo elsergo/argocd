@@ -12,7 +12,7 @@ spec:
   source:
     path: "HelmCharts/1color"
     repoURL: "git@github.com:elsergo/1color.git"
-    targetRevision: HEAD
+    targetRevision: release
     helm:
       valueFiles:
         - values_prod.yaml
