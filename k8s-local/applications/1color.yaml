@@ -11,7 +11,7 @@ spec:
     namespace: 1color
   source:
     path: "HelmCharts/1color"
-    repoURL: "git@github.com:elsergo/1color.git"
+    repoURL: "git@github.com:elsergo/argocd.git"
     targetRevision: release
     helm:
       valueFiles:
