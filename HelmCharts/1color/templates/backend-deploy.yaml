@@ -20,11 +20,11 @@ spec:
       containers:
         - name: backend
           image: {{ .Values.backend.container.image }}
-          imagePullSecrets:
-            - name: nexus-registry-credential
           command:
             - sh
             - -c
             - nohup gunicorn --workers=5 --threads 2 --timeout 60 --bind=0.0.0.0:8000 onecolor.wsgi:application
           ports:
             - containerPort: {{ .Values.backend.container.containerPort }}
+          imagePullSecrets:
+            - name: nexus-registry-credential
