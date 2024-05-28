@@ -10,7 +10,7 @@ spec:
     name: in-cluster
     namespace: 1color
   source:
-    path: "HelmCharts/1color"
+    path: "HelmCharts/OneColor"
     repoURL: "git@github.com:elsergo/argocd.git"
     targetRevision: HEAD
     helm:
