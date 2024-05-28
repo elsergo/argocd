@@ -26,5 +26,6 @@ spec:
             - nohup gunicorn --workers=5 --threads 2 --timeout 60 --bind=0.0.0.0:8000 onecolor.wsgi:application
           ports:
             - containerPort: {{ .Values.backend.container.containerPort }}
+      imagePullPolicy: Always
       imagePullSecrets:
         - name: nexus-registry-credential
