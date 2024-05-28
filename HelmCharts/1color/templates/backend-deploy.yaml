@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-backend-deployment
+  labels:
+    app: {{ .Release.Name }}-backend
+    owner: SergeySidorenko
+spec:
+  replicas: {{ .Values.backend.replicaCount }}
+  selector:
+    matchLabels:
+      project: {{ .Release.Name }}
+      app: {{ .Release.Name }}-backend
+  template:
+    metadata:
+      labels:
+        project: {{ .Release.Name }}   # Service will look for those PODS Labels!!!
+        app: {{ .Release.Name }}-backend
+    spec:
+      containers:
+        - name: backend
+          image: {{ .Values.backend.container.image }}
+          command:
+            - sh
+            - -c
+            - nohup gunicorn --workers=5 --threads 2 --timeout 60 --bind=0.0.0.0:8000 onecolor.wsgi:application
+          ports:
+            - containerPort: {{ .Values.backend.container.containerPort }}
