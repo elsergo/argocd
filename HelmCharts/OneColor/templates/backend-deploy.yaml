@@ -24,16 +24,57 @@ spec:
             - sh
             - -c
             - nohup gunicorn --workers=5 --threads 2 --timeout 60 --bind=0.0.0.0:8000 onecolor.wsgi:application
+          env:
+            - name: DJANGO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: backend-env
+                  key: DJANGO_SECRET_KEY
+            - name: DJANGO_DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: backend-env
+                  key: DJANGO_DOMAIN
+            - name: DJANGO_SUPERUSER_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: backend-env
+                  key: DJANGO_SUPERUSER_USERNAME
+            - name: DJANGO_SUPERUSER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: backend-env
+                  key: DJANGO_SUPERUSER_PASSWORD
+            - name: DJANGO_SUPERUSER_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: backend-env
+                  key: DJANGO_SUPERUSER_EMAIL
+            - name: DJANGO_PROFILE
+              valueFrom:
+                secretKeyRef:
+                  name: backend-env
+                  key: DJANGO_PROFILE
+            - name: DJANGO_EMAIL_HOST_USER
+              valueFrom:
+                secretKeyRef:
+                  name: backend-env
+                  key: DJANGO_EMAIL_HOST_USER
+            - name: DJANGO_EMAIL_HOST_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: backend-env
+                  key: DJANGO_EMAIL_HOST_PASSWORD
           ports:
             - containerPort: {{ .Values.backend.container.containerPort }}
-          volumeMounts:
-            - name: env
-              mountPath: $HOME/.env
-              readOnly: true
+#          volumeMounts:
+#            - name: env
+#              mountPath: $HOME/.env
+#              readOnly: true
       imagePullPolicy: Always
       imagePullSecrets:
         - name: nexus-registry-credential
-      volumes:
-        - name: env
-          secret:
-            secretName: backend-env
+#      volumes:
+#        - name: env
+#          secret:
+#            secretName: backend-env
