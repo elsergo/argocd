@@ -67,14 +67,6 @@ spec:
                   key: DJANGO_EMAIL_HOST_PASSWORD
           ports:
             - containerPort: {{ .Values.backend.container.containerPort }}
-#          volumeMounts:
-#            - name: env
-#              mountPath: $HOME/.env
-#              readOnly: true
       imagePullPolicy: Always
       imagePullSecrets:
         - name: nexus-registry-credential
-#      volumes:
-#        - name: env
-#          secret:
-#            secretName: backend-env
