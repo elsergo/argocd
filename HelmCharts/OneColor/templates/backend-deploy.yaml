@@ -26,15 +26,14 @@ spec:
             - nohup gunicorn --workers=5 --threads 2 --timeout 60 --bind=0.0.0.0:8000 onecolor.wsgi:application
           ports:
             - containerPort: {{ .Values.backend.container.containerPort }}
-          volumeMounts:
-            # name must match the volume name below
-            - name: env
-              mountPath: $HOME/.env
-              readOnly: true
+#          volumeMounts:
+#            - name: env
+#              mountPath: $HOME/.env
+#              readOnly: true
       imagePullPolicy: Always
       imagePullSecrets:
         - name: nexus-registry-credential
-      volumes:
-        - name: env
-          secret:
-            secretName: backend-env
+#      volumes:
+#        - name: env
+#          secret:
+#            secretName: backend-env
